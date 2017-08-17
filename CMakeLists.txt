@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(sfml-cmake-template)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/bin/Release)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/bin/Debug)
+
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
+file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp ${PROJECT_SOURCE_DIR}/src/*.h)
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+find_package(SFML REQUIRED COMPONENTS system graphics window)
+include_directories(${SFML_INCLUDE_DIR})
+
+target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SFML_DEPEDENCIES})
